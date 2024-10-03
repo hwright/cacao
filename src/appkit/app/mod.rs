@@ -44,7 +44,8 @@ use objc::runtime::Object;
 use objc::{class, msg_send, msg_send_id, sel};
 
 use crate::appkit::menu::Menu;
-use crate::foundation::{id, nil, AutoReleasePool, NSUInteger, NO, YES};
+use crate::filesystem::ModalResponse;
+use crate::foundation::{id, nil, AutoReleasePool, NSInteger, NSUInteger, NO, YES};
 use crate::invoker::TargetActionHandler;
 use crate::notification_center::Dispatcher;
 use crate::utils::activate_cocoa_multithreading;
@@ -318,5 +319,17 @@ impl App {
         shared_application(|app| unsafe {
             let _: () = msg_send![app, terminate: nil];
         });
+    }
+
+    /// Starts a modal event loop for the given window.
+    ///
+    /// This method runs a modal event loop for the specified window synchronously.
+    /// It displays the specified window, makes it key, starts the run loop, and
+    /// processes events for that window.
+    pub fn run_modal_for_window(window: Window) -> ModalResponse {
+        shared_application(|app| unsafe {
+            let modal_response: NSInteger = msg_send![app, runModalForWindow: &*window.objc];
+            modal_response.into()
+        })
     }
 }
