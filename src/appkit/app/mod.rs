@@ -44,7 +44,6 @@ use objc::runtime::Object;
 use objc::{class, msg_send, msg_send_id, sel};
 
 use crate::appkit::menu::Menu;
-use crate::filesystem::ModalResponse;
 use crate::foundation::{id, nil, AutoReleasePool, NSInteger, NSUInteger, NO, YES};
 use crate::invoker::TargetActionHandler;
 use crate::notification_center::Dispatcher;
