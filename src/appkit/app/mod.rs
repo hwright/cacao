@@ -326,7 +326,7 @@ impl App {
     /// This method runs a modal event loop for the specified window synchronously.
     /// It displays the specified window, makes it key, starts the run loop, and
     /// processes events for that window.
-    pub fn run_modal_for_window(window: Window) -> ModalResponse {
+    pub fn run_modal_for_window(window: &Window) -> ModalResponse {
         shared_application(|app| unsafe {
             let modal_response: NSInteger = msg_send![app, runModalForWindow: &*window.objc];
             modal_response.into()
