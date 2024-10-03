@@ -326,6 +326,9 @@ impl App {
     /// This method runs a modal event loop for the specified window synchronously.
     /// It displays the specified window, makes it key, starts the run loop, and
     /// processes events for that window.
+    ///
+    /// Modern MacOS modal views should really be using the sheets API, but this
+    /// is still part of AppKit, so provided for completeness.
     pub fn run_modal_for_window(window: &Window) -> ModalResponse {
         shared_application(|app| unsafe {
             let modal_response: NSInteger = msg_send![app, runModalForWindow: &*window.objc];
