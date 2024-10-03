@@ -52,6 +52,21 @@ impl From<NSInteger> for ModalResponse {
     }
 }
 
+impl Into<NSInteger> for ModalResponse {
+    fn into(self) -> NSInteger {
+        match self {
+            ModalResponse::Ok => 1,
+            ModalResponse::Canceled => 0,
+            ModalResponse::FirstButtonReturned => 1000,
+            ModalResponse::SecondButtonReturned => 1001,
+            ModalResponse::ThirdButtonReturned => 1002,
+            ModalResponse::Stopped => -1000,
+            ModalResponse::Aborted => -1001,
+            ModalResponse::Continue => -1002
+        }
+    }
+}
+
 /// Represents a type of search path used in file manager calls.
 #[derive(Copy, Clone, Debug)]
 pub enum SearchPathDomainMask {

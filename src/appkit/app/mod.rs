@@ -332,4 +332,12 @@ impl App {
             modal_response.into()
         })
     }
+
+    /// Stop the current modal window, returning the given code.
+    pub fn stop_modal_with_code(modal_response: ModalResponse) {
+        shared_application(|app| unsafe {
+            let response: NSInteger = modal_response.into();
+            let _: () = msg_send![app, stopModalWithCode: response];
+        });
+    }
 }
