@@ -113,7 +113,7 @@ impl Window {
         }
     }
 
-    pub(crate) unsafe fn existing(window: *mut Object) -> Window {
+    pub unsafe fn existing(window: *mut Object) -> Window {
         Window {
             objc: Id::retain(window).unwrap(),
             delegate: None
